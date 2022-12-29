@@ -17,10 +17,10 @@ npm run start:server2
 ## How to test
 -  Call the first server
 ```
-curl http://localhost:3001/products?name=product_name
+curl "http://localhost:3001/products?name=product_name"
 ```
 
 -  Call the second server
 ```
-curl http://localhost:3002/products?name=product_name
+curl -X POST "http://localhost:3002/cart" --data '{"id":"123"}'
 ```

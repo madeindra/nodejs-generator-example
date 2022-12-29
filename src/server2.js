@@ -1,22 +1,18 @@
 // import dependencies
 import { createServer } from 'node:http';
-import { parse } from 'node:url';
-import { randomUUID } from 'node:crypto';
+import { once } from 'node:events';
 
 // config
 const PORT = 3002;
 
 // handler
 async function handler(req, res) {
-  if (req.method === 'GET' && req.url.startsWith('/products')) {
-    const { query: { name } }  = parse(req.url, true);
-    
-    const item = {
-      id: randomUUID(),
-      product: name,
-    }
+  if (req.method === 'POST' && req.url.startsWith('/cart')) {
+    const data = await once(req, 'data');
+    const item = JSON.parse(data);
+    console.log('received', item);
 
-    return res.end(JSON.stringify(item));
+    return res.end(`Process was successful for ${item.id}`);
   }
 
   return res.end('Hello World!');
