@@ -9,9 +9,29 @@ const db = {
 const productURL = 'http://localhost:3001/products';
 const cartURL = 'http://localhost:3002/cart';
 
-async function processData() {
+// ! this is the approach without generator
+// async function processData() {
+//   const products = await db.getProduct();
+//   const res = [];
+
+//   for (const product of products) {
+//     const productInfo = await (await fetch(`${productURL}?name=${product}`)).text();
+//     const cartInfo = await (await fetch(cartURL, {
+//       method: 'POST',
+//       body: productInfo,
+//     })).text();
+
+//     res.push(cartInfo);
+//   }
+
+//   return res;
+// }
+
+// console.table(await processData())
+
+// ! this is the approach using generator
+async function * processDataGenerator() {
   const products = await db.getProduct();
-  const res = [];
 
   for (const product of products) {
     const productInfo = await (await fetch(`${productURL}?name=${product}`)).text();
@@ -20,10 +40,10 @@ async function processData() {
       body: productInfo,
     })).text();
 
-    res.push(cartInfo);
+    yield cartInfo;
   }
-
-  return res;
 }
 
-console.table(await processData())
+for await (const data of processDataGenerator()) {
+  console.table(data)
+}

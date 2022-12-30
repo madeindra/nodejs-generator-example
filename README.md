@@ -1,4 +1,7 @@
 # Generator in JS
+Using generator in this projects make it possible to process batch data as iterable.
+
+Without generator, we only get feedback after the processing complete (in this project, in the console). With generator, we can get feedback after each batch processed.
 
 ## Requirements
 NodeJS 18.4.0
@@ -20,3 +23,7 @@ npm run start:cart
 ```
 npm run start:client
 ```
+
+### References
+
+[Eric Wendel - Learn JavaScript Generators in practice](https://www.youtube.com/watch?v=edaYw9UhQ0M)
