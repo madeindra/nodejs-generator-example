@@ -14,8 +14,13 @@ async function processData() {
   const res = [];
 
   for (const product of products) {
-    const productInfo = await (await fetch(`${productURL}?name=${product}`)).json();
-    res.push(productInfo);
+    const productInfo = await (await fetch(`${productURL}?name=${product}`)).text();
+    const cartInfo = await (await fetch(cartURL, {
+      method: 'POST',
+      body: productInfo,
+    })).text();
+
+    res.push(cartInfo);
   }
 
   return res;
