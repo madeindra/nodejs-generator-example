@@ -8,8 +8,8 @@
     "node": ">=18.4.0"
   },
   "scripts": {
-    "start:server1": "node --no-warnings src/server1.js",
-    "start:server2": "node --no-warnings src/server2.js",
+    "start:product": "node --no-warnings src/server-product.js",
+    "start:cart": "node --no-warnings src/server-cart.js",
     "start:client": "node --no-warnings src/client.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
